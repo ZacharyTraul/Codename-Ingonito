@@ -1,0 +1,23 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{A6BCDBC6-8D19-6C4E-DB23-9D7941677181}") = "PlayerPrefab", "Assembly-CSharp.csproj", "{469F27B3-FADC-B2E6-8618-71AEFC794DD2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{469F27B3-FADC-B2E6-8618-71AEFC794DD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{469F27B3-FADC-B2E6-8618-71AEFC794DD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{469F27B3-FADC-B2E6-8618-71AEFC794DD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{469F27B3-FADC-B2E6-8618-71AEFC794DD2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal

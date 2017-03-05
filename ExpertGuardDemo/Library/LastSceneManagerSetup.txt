@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/ExpertGuardDemo.unity
+  isLoaded: 1
+  isActive: 1
