@@ -20,7 +20,7 @@ public class RoomLighting : MonoBehaviour {
 
 	}
 
-	// Update is called once per frame
+	// Update is called once per frame (oh really now? i had no freaking idea)
 	void Update () {
 		Bounds current = new Bounds(Vector3.zero, Vector3.one);
 		bool inside = false;
