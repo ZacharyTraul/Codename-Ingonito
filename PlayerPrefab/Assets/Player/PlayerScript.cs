@@ -27,12 +27,25 @@ public class PlayerScript : MonoBehaviour {
 	private Vector3 new_velocity = Vector3.zero;
 	private static bool jump_allowed = false;
 
+<<<<<<< HEAD
 	private static int jump_state = 0;
 	public int max_jumps = 2;
 	private static int jump_timer_reset = 7;
 	private static int jump_timer = jump_timer_reset;
 
 	private static int visibility;
+=======
+	private Vector3 shoes = new Vector3 (0, -1.1f, 0); //creative variable naming
+	private Vector3 jump_vector = Vector3.zero;
+	private float face = 0;
+	private Vector3 new_velocity = Vector3.zero;
+
+	private static int jump_state = 0;
+	private int max_jumps = 2;
+	private static int jump_timer_reset = 7;
+	private static int jump_timer = jump_timer_reset;
+
+>>>>>>> origin/master
 
 	// Use this for initialization
 	void Start () {
@@ -45,6 +58,7 @@ public class PlayerScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+<<<<<<< HEAD
 		//Get the block behind our head in order to determine how visible we are. Pretty neat.
 		RaycastHit hit;
 		if (Physics.Linecast (player.transform.position, player.transform.position - Vector3.right, out hit)) {
@@ -60,6 +74,8 @@ public class PlayerScript : MonoBehaviour {
 			//Debug.Log (visibility);
 		}
 
+=======
+>>>>>>> origin/master
 		//If the player is not hidden, move them in the desired direction.
 		if (!hidden) { //watch as i do some crazy math
 			face = Input.GetAxis ("Horizontal"); //horizontal is a built in unity axis that is -1 when either A or left arrow, and is 1 when either D or right arrow.
