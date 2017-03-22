@@ -2,9 +2,7 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Player\PlayerScript.cs">
     <Files>
-      <File FileName="Assets\Player\PlayerScript.cs" Line="92" Column="28" />
-      <File FileName="Assets\Room\RoomLighting.cs" Line="1" Column="1" />
-      <File FileName="Assets\Room\Room.cs" Line="1" Column="1" />
+      <File FileName="Assets\Player\PlayerScript.cs" Line="93" Column="7" />
       <File FileName="Assets\Player\Jumper.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>

@@ -15,33 +15,26 @@ public class PlayerScript : MonoBehaviour {
 
 	public GameObject feet_model;
 
+	public int number_of_rooms;
+
 	private static GameObject player;
 	private Rigidbody rb;
+	private string old_tag;
 
 	private static bool hidden = false;
 	private GameObject feet;
 
-	private Vector3 shoes = new Vector3 (0, -1.1f, 0); //creative variable naming
+	private Vector3 shoes = new Vector3 (0, -1.11f, 0); //creative variable naming
 	private Vector3 jump_vector = Vector3.zero;
 	private float face = 0;
 	private Vector3 new_velocity = Vector3.zero;
 	private static bool jump_allowed = false;
 	private static int jump_state = 0;
 	public int max_jumps = 2;
-	private static int jump_timer_reset = 7;
+	private static int jump_timer_reset = 1;
 	private static int jump_timer = jump_timer_reset;
 
 	private static int visibility;
-
-	private Vector3 shoes = new Vector3 (0, -1.1f, 0); //creative variable naming
-	private Vector3 jump_vector = Vector3.zero;
-	private float face = 0;
-	private Vector3 new_velocity = Vector3.zero;
-
-	private static int jump_state = 0;
-	private int max_jumps = 2;
-	private static int jump_timer_reset = 7;
-	private static int jump_timer = jump_timer_reset;
 
 	// Use this for initialization
 	void Start () {
@@ -50,12 +43,41 @@ public class PlayerScript : MonoBehaviour {
 		feet = Instantiate (feet_model, start_position + new Vector3 (0, -1, 0), Quaternion.identity) as GameObject;
 		rb = player.GetComponent<Rigidbody> ();
 		jump_vector = new Vector3 (0, jump_power, 0);
+	
+		string room_name;
+		GameObject[] temp_object_list;
+
+		//Deactivates all the rooms, and makes sure not to deactivate the camera and lights.
+		for (int i = 1; i <= number_of_rooms; i++) {
+			room_name = string.Concat ("Room_" + i.ToString ());
+			temp_object_list = GameObject.FindGameObjectsWithTag (room_name);
+
+			foreach (GameObject go in temp_object_list) {
+				go.SetActive (false);
+			}
+
+		}
+
+		RaycastHit hit;
+
+		if (Physics.Linecast (player.transform.position, player.transform.position - Vector3.right, out hit)) {
+			//Activates the one behind the player.
+			temp_object_list = GameObject.FindGameObjectsWithTag (old_tag);
+
+			foreach (GameObject go in temp_object_list) {
+				go.SetActive (true);
+			}
+		}
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		//Get the block behind our head in order to determine how visible we are. Pretty neat.
 		RaycastHit hit;
+		string new_tag;
+		GameObject[] temp_object_list;
+
 		if (Physics.Linecast (player.transform.position, player.transform.position - Vector3.right, out hit)) {
 			//Basically just checks for the how bright it is in the name of the block.
 			if (hit.collider.name.Contains ("Dark")) {
@@ -65,7 +87,23 @@ public class PlayerScript : MonoBehaviour {
 			} else if (hit.collider.name.Contains ("Light")) {
 				visibility = 3;
 			}
+			//Checks if the tag of the object behind you changes, if so, change activation.
+			new_tag = hit.collider.tag;
+			if (new_tag != tag) {
+				temp_object_list = GameObject.FindGameObjectsWithTag (old_tag);
 
+				foreach (GameObject go in temp_object_list) {
+					go.SetActive (false);
+				}
+
+				temp_object_list = GameObject.FindGameObjectsWithTag (new_tag);
+
+				foreach (GameObject go in temp_object_list) {
+					go.SetActive (true);
+				}
+			}
+
+			old_tag = new_tag;
 			//Debug.Log (visibility);
 		}
 
@@ -81,23 +119,22 @@ public class PlayerScript : MonoBehaviour {
 				rb.velocity = new_velocity;
 			}
 
-			//i rewrote jumping a little bit so I'll give you the rundown
-
 			if (jump_state != max_jumps) {
 				//jump_state is a variable that refers to the current jump that you aer doing.
 				//max_jumps is a changeable variable for if you want single-jump or triple-jump or whatever. i like double-jumping so that's why i did this.
 				if (Input.GetKeyDown (KeyCode.UpArrow) || Input.GetKeyDown ("w")) {
-					//when we jump, we reset vertical momentum because it just kinda feels better
+					//when we jump, we reset vertical momentum because it just kinda feelwwwwwws better
 					new_velocity = rb.velocity;
 					new_velocity.y = 0;
 					rb.velocity = new_velocity;
 				}
 				if (Input.GetKey (KeyCode.UpArrow) || Input.GetKey ("w")) {
-					if (jump_timer != 0) {
+					if (jump_timer < 10) {
 						//we have a jump timer now that adds force to the player over time, and it decrements over time as well.
 						//as long as jump is held AND the jump_timer is stil gucci, force will be applied.
+						jump_vector.y = jump_power/(jump_timer);
 						rb.AddForce (jump_vector, ForceMode.VelocityChange);
-						jump_timer--;
+						jump_timer++;
 						//Debug.Log ("Jump " + jump_state);
 						//Debug.Log ("Timer: " + jump_timer);
 					}
@@ -151,12 +188,7 @@ public class PlayerScript : MonoBehaviour {
 
 	public static void Jumper(bool jump){
 		jump_allowed = jump;
-	}
-
-	public static void JumpSet(int setState, bool timer){
-		jump_state = setState;
-		if (timer) {
-			jump_timer = jump_timer_reset;
-		}
+		jump_state = 0;
+		jump_timer = jump_timer_reset;
 	}
 }

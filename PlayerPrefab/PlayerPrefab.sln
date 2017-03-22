@@ -1,7 +1,7 @@
+﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2008
-
-Project("{A6BCDBC6-8D19-6C4E-DB23-9D7941677181}") = "PlayerPrefab", "Assembly-CSharp.csproj", "{469F27B3-FADC-B2E6-8618-71AEFC794DD2}"
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayerPrefab", "Assembly-CSharp.csproj", "{469F27B3-FADC-B2E6-8618-71AEFC794DD2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
